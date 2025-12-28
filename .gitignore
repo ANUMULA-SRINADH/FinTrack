@@ -1,12 +1,6 @@
-# Python
-__pycache__/
+node_modules/
 venv/
-*.py[cod]
+__pycache__/
 .env
 database.db
-
-# React / Node
-node_modules/
 build/
-.DS_Store
-.env.local
