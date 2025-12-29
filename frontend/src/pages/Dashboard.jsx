@@ -4,6 +4,8 @@ import { PlusCircle, Wallet, List ,PieChart as ChartIcon,Trash2 ,Target ,Search,
 import { PieChart ,Pie ,Cell ,ResponsiveContainer ,Tooltip ,Legend } from 'recharts';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid } from 'recharts';
 
+import { jsPDF } from "jspdf";
+import "jspdf-autotable";
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable'; // Import it as a function
 import html2canvas from 'html2canvas';
