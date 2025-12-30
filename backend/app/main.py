@@ -192,17 +192,13 @@ def forgot_password(data: schemas.EmailRequest, db: Session = Depends(get_db)):
     
     db.commit()
     
-    # 4. LIVE PRODUCTION LINK
-    # This matches the path="/reset-password/:token" in your App.js
-    frontend_url = "https://fintrack-lilac-five.vercel.app"
-    reset_link = f"{frontend_url}/reset-password/{token}"
-
-    # This prints to your Render logs so you can copy/paste it
-    print(f"\n********** RESET LINK FOR: {data.email} **********")
-    print(reset_link)
-    print(f"**************************************************\n")
+    # 4. For now, print to console so you can copy-paste it
+    print(f"\n********** RESET LINK **********\n")
+    print(f"http://localhost:3000/reset-password?token={token}")
+    print(f"\n********************************\n")
     
     return {"message": "Reset link generated successfully"}
+
 
 # backend/app/main.py
 
