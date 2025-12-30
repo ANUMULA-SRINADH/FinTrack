@@ -199,6 +199,7 @@ def forgot_password(data: schemas.EmailRequest, db: Session = Depends(get_db)):
     
     return {"message": "Reset link generated successfully"}
 
+
 # backend/app/main.py
 
 @app.post("/reset-password")
