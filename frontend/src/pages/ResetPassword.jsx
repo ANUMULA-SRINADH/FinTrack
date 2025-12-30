@@ -1,15 +1,17 @@
 import React, { useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useSearchParams, useNavigate } from 'react-router-dom';
 import { Lock } from 'lucide-react';
 import { authService } from '../services/api';
 
 const ResetPassword = () => {
-    const { token } = useParams(); // Matches the :token in your App.js route
+    const [searchParams] = useSearchParams();
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [message, setMessage] = useState('');
     const [error, setError] = useState('');
     const navigate = useNavigate();
+
+    const token = searchParams.get('token');
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -17,7 +19,7 @@ const ResetPassword = () => {
             return setError("Passwords do not match");
         }
         try {
-            // Your API should receive the token from the URL and the new password
+            // Update your api.js to include this endpoint
             await authService.resetPassword(token, password);
             setMessage("Password reset successful! Redirecting to login...");
             setTimeout(() => navigate('/login'), 3000);
@@ -25,7 +27,7 @@ const ResetPassword = () => {
             setError("Link expired or invalid. Please request a new one.");
         }
     };
-    
+
     return (
         <div className="min-h-screen flex items-center justify-center bg-gray-100 p-4">
             <div className="bg-white p-8 rounded-2xl shadow-xl w-full max-w-md">

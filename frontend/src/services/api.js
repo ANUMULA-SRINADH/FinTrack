@@ -29,14 +29,7 @@ export const authService = {
   },
   signup: (userData) => api.post('/signup', userData),
   forgotPassword: (email) => api.post('/forgot-password', { email }),
-
-  // In services/api.js
-  resetPassword: async (token, newPassword) => {
-      return await api.post('/reset-password', { 
-          token: token, 
-          new_password: newPassword 
-      });
-  }
+  resetPassword: (token, password) => api.post('/reset-password', { token, new_password: password })
 };
 
 // --- Export 2: Transactions (ADD THIS PART) ---

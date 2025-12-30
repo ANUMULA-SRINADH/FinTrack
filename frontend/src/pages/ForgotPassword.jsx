@@ -9,14 +9,13 @@ const ForgotPassword = () => {
     const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-        await authService.forgotPassword(email);
-        alert("If this email exists, a reset link has been sent to the console.");
-        navigate('/login'); // This redirects the user back to Login
-    } catch (err) {
-        setMessage("An error occurred. Please try again.");
-    }
+        e.preventDefault();
+        try {
+            await authService.forgotPassword(email);
+            setMessage("If this email exists, a reset link has been sent to the console.");
+        } catch (err) {
+            setMessage("An error occurred. Please try again.");
+        }
     };
 
     return (
