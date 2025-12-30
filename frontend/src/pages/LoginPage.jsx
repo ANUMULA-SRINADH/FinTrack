@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'; // Using this for redirect
 import { Lock, Mail } from 'lucide-react'; // Using icons for better UI
 import { authService } from '../services/api';
 
-const LoginPage = () => { // Renamed to LoginPage to match your file name and export
+const LoginPage = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [isSignup, setIsSignup] = useState(false);
@@ -11,28 +11,26 @@ const LoginPage = () => { // Renamed to LoginPage to match your file name and ex
     const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
-    e.preventDefault();
-    setError('');
-    try {
-        if (isSignup) {
-            await authService.signup({ email, password });
-            alert("Account created! Please sign in.");
-            setIsSignup(false);
-        } else {
-            const data = await authService.login(email, password);
-            
-            // 1. Force save the token just in case
-            if (data.access_token) {
-                localStorage.setItem('token', data.access_token);
-                
-                // 2. Use a "Hard" redirect to break out of the Chrome warning hang
-                window.location.href = '/dashboard'; 
+        e.preventDefault();
+        setError('');
+        try {
+            if (isSignup) {
+                await authService.signup({ email, password });
+                alert("Account created! Please sign in.");
+                setIsSignup(false);
+            } else {
+                const data = await authService.login(email, password);
+                if (data.access_token) {
+                    localStorage.setItem('token', data.access_token);
+                    // navigate is preferred for internal routes
+                    navigate('/dashboard'); 
+                }
             }
+        } catch (err) {
+            // Dynamically show backend errors like "Email already exists"
+            const errorMsg = err.response?.data?.detail || "Invalid email or password.";
+            setError(errorMsg);
         }
-    } catch (err) {
-        // If we reach here, it's a real backend failure (401 Unauthorized)
-        setError("Invalid email or password. Please try again.");
-    }
     };
 
     return (
