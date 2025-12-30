@@ -10,10 +10,14 @@ import datetime
 
 app = FastAPI(title="FinTrack API", version="1.0.0")
 
+# 1. Fetch the origins from your Render Environment tab
+# 2. Split it by comma if you have multiple URLs
+origins = os.getenv("CORS_ALLOWED_ORIGINS", "http://localhost:3000").split(",")
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["CORS_ALLOWED_ORIGINS","http://localhost:3000",],
-    allow_credentials =True,
+    allow_origins=origins,  # REMOVE THE QUOTES. Use the variable directly.
+    allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
