@@ -7,6 +7,7 @@ from jose import JWTError,jwt
 from fastapi.security import OAuth2PasswordRequestForm , OAuth2PasswordBearer
 from . import auth  # or 'from app import auth' depending on your run command
 import datetime
+import os
 
 app = FastAPI(title="FinTrack API", version="1.0.0")
 
